@@ -2,9 +2,7 @@ import 'package:http/http.dart' as http;
 import 'package:webfeed/webfeed.dart';
 import 'package:flutter/foundation.dart';
 
-final url = 'https://www.reddit.com/.rss';
-
-final pathSuffix = 'dashcast/downloads';
+final url = 'http://www.bbc.co.uk/music/genres/rockandindie/reviews.rss';
 
 class News with ChangeNotifier {
   RssFeed _feed;
@@ -19,7 +17,7 @@ class News with ChangeNotifier {
     notifyListeners();
   }
 
-  void parse(String url) async {
+  void parse() async {
     final res = await http.get(url);
     final xmlStr = res.body;
     _feed = RssFeed.parse(xmlStr);

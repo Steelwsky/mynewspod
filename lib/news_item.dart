@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:mynewspod/news_page.dart';
 import 'package:webfeed/domain/rss_feed.dart';
 import 'controller.dart';
 import 'package:provider/provider.dart';
 
-class Feed extends StatelessWidget {
-  Feed({Key key, this.rssFeed}) : super(key: key);
+class NewsItems extends StatelessWidget {
+  NewsItems({Key key, this.rssFeed}) : super(key: key);
   final RssFeed rssFeed;
 
   @override
@@ -23,7 +24,7 @@ class Feed extends StatelessWidget {
           onTap: () {
             Provider.of<News>(context).selectedItem = i;
             Navigator.of(context).push(
-              MaterialPageRoute(builder: (_) => PlayerPage()),
+              MaterialPageRoute(builder: (_) => MyNewsPage()),
             );
           },
         ),

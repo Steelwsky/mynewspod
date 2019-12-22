@@ -1,30 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'controller.dart';
+import 'news_item.dart';
 
-class MyNewsFeed extends StatelessWidget {
-  MyNewsFeed({Key key, this.title}) : super(key: key);
-  final String title;
+class MyNewsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final List<String> entries = <String>['A', 'B', 'C',];
-    final List<int> colorCodes = <int>[600, 500, 100, ];
     return Scaffold(
-        appBar: AppBar(
-          title: Text(title),
-        ),
-        body: Center(
-            child: ListView.separated(
-              padding: const EdgeInsets.all(8),
-              itemCount: entries.length,
-              itemBuilder: (BuildContext context, int index) {
-                return Container(
-                  height: 50,
-                  color: Colors.amber[colorCodes[index]],
-                  child: Center(child: Text('Entry ${entries[index]}')),
-                );
-              },
-              separatorBuilder: (BuildContext context, int index) =>
-              const Divider(),
-            )));
+      body: Consumer<News>(builder: (context, news, _) {
+        return news.feed != null
+            ? NewsItems(rssFeed: news.feed)
+            : Center(
+          child: CircularProgressIndicator(),
+        );
+      }),
+    );
   }
 }
