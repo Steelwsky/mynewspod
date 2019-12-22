@@ -11,7 +11,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: MyNewsFeed(title: 'Reddit top feed'),
+      home: NewsPage(title: 'Reddit top feed'),
     );
   }
 }

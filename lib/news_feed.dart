@@ -1,30 +1,34 @@
 import 'package:flutter/material.dart';
+import 'package:webfeed/domain/rss_feed.dart';
+import 'feed_widget.dart';
+import 'package:http/http.dart' as http;
+import 'controller.dart';
 
-class MyNewsFeed extends StatelessWidget {
-  MyNewsFeed({Key key, this.title}) : super(key: key);
+class NewsPage extends StatelessWidget {
+  NewsPage({Key key, this.title}) : super(key: key);
   final String title;
 
   @override
   Widget build(BuildContext context) {
-    final List<String> entries = <String>['A', 'B', 'C',];
-    final List<int> colorCodes = <int>[600, 500, 100, ];
     return Scaffold(
-        appBar: AppBar(
-          title: Text(title),
-        ),
-        body: Center(
-            child: ListView.separated(
-          padding: const EdgeInsets.all(8),
-          itemCount: entries.length,
-          itemBuilder: (BuildContext context, int index) {
-            return Container(
-              height: 50,
-              color: Colors.amber[colorCodes[index]],
-              child: Center(child: Text('Entry ${entries[index]}')),
+      body: FutureBuilder(
+        future: http.get(url),
+        builder: (_, AsyncSnapshot<http.Response> snapshot) {
+          if (snapshot.hasData) {
+            final response = snapshot.data;
+            if (response.statusCode == 200) {
+              final rssString = response.body;
+              var rssFeed = RssFeed.parse(rssString);
+              return Feed();
+            }
+            return null;
+          } else {
+            return Center(
+              child: CircularProgressIndicator(),
             );
-          },
-          separatorBuilder: (BuildContext context, int index) =>
-              const Divider(),
-        )));
+          }
+        },
+      ),
+    );
   }
 }
