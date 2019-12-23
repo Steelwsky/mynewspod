@@ -5,14 +5,14 @@ import 'package:flutter/foundation.dart';
 final url = 'http://www.bbc.co.uk/music/genres/rockandindie/reviews.rss';
 
 class News with ChangeNotifier {
-  RssFeed _feed;
-  RssItem _selectedItem;
+  AtomFeed _feed;
+  AtomItem _selectedItem;
 
-  RssFeed get feed => _feed;
+  AtomFeed get feed => _feed;
 
-  RssItem get selectedItem => _selectedItem;
+  AtomItem get selectedItem => _selectedItem;
 
-  set selectedItem(RssItem value) {
+  set selectedItem(AtomItem value) {
     _selectedItem = value;
     notifyListeners();
   }
@@ -20,7 +20,7 @@ class News with ChangeNotifier {
   void parse() async {
     final res = await http.get(url);
     final xmlStr = res.body;
-    _feed = RssFeed.parse(xmlStr);
+    _feed = AtomFeed.parse(xmlStr);
     notifyListeners();
   }
 

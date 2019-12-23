@@ -1,20 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'controller.dart';
-import 'news_item.dart';
+import 'package:mynewspod/expanded_news_widget.dart';
 
-class MyNewsPage extends StatelessWidget {
-
+class NewsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Consumer<News>(builder: (context, news, _) {
-        return news.feed != null
-            ? NewsItems(rssFeed: news.feed)
-            : Center(
-          child: CircularProgressIndicator(),
-        );
-      }),
+      appBar: AppBar(
+        title: Text(
+          Provider.of<News>(context).selectedItem.title,
+        ),
+      ),
+      body: SafeArea(child: ExpandedNews()),
     );
   }
 }
