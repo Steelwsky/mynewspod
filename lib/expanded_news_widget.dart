@@ -12,22 +12,23 @@ class ExpandedNews extends StatelessWidget {
             flex: 8,
             child: SingleChildScrollView(
               child: Column(children: [
-                Image.network(news.feed.image.url),
+//                Image.network(news.feed.image.url),
                 Padding(
                   padding: const EdgeInsets.all(10),
                   child: Text(
                     news.selectedItem.description.trim(),
+                    style: TextStyle(fontSize: 16),
                   ),
                 ),
               ]),
             )),
-        Flexible(
-          flex: 2,
-          child: Material(
-            elevation: 12,
-            child: Placeholder(),
-          ),
-        ),
+//        Flexible(
+//          flex: 2,
+//          child: Material(
+//            elevation: 12,
+//            child: Placeholder(),
+//          ),
+//        ),
       ],
     );
   }

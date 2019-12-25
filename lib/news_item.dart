@@ -15,11 +15,12 @@ class NewsItems extends StatelessWidget {
       children: rssFeed.items
           .map(
             (i) => ListTile(
-          title: Text(i.title),
+          title: Text(i.title, style: TextStyle(fontSize: 18),),
           subtitle: Text(
             i.description,
             maxLines: 3,
             overflow: TextOverflow.ellipsis,
+            style: TextStyle(fontSize: 16),
           ),
           onTap: () {
             Provider.of<News>(context).selectedItem = i;
@@ -30,7 +31,6 @@ class NewsItems extends StatelessWidget {
         ),
       )
           .toList(),
-
     );
   }
 }
