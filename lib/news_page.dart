@@ -15,4 +15,5 @@ class NewsPage extends StatelessWidget {
       body: SafeArea(child: ExpandedNews()),
     );
   }
+
 }

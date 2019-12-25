@@ -9,7 +9,9 @@ final url = 'http://www.cnbc.com/id/19789731/device/rss/rss.xml';
 class News with ChangeNotifier {
   RssFeed _feed;
   RssItem _selectedItem;
+  bool isFavorite = false;
 
+//  bool get isFavorite => _isFavorite;
   RssFeed get feed => _feed;
 
   RssItem get selectedItem => _selectedItem;
@@ -25,6 +27,10 @@ class News with ChangeNotifier {
     _feed = RssFeed.parse(xmlStr);
     notifyListeners();
   }
+
+  void favoriteChanger() {
+    isFavorite = !isFavorite;
+}
 
 //Future<String> _getDownloadPath(String filename) async {
 //  final dir = await getApplicationDocumentsDirectory();
