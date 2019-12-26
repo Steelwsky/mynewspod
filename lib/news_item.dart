@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mynewspod/news_page.dart';
+import 'package:mynewspod/star_widget.dart';
 import 'package:webfeed/domain/atom_feed.dart';
 import 'package:webfeed/domain/rss_feed.dart';
 import 'controller.dart';
@@ -28,22 +29,7 @@ class NewsItems extends StatelessWidget {
                 overflow: TextOverflow.ellipsis,
                 style: TextStyle(fontSize: 16),
               ),
-              trailing:  GestureDetector(
-                behavior: HitTestBehavior.translucent,
-                onTap: () {
-                  Provider.of<News>(context).favoriteChanger();
-                  print('changer is: ${news.isFavorite}');
-                },
-                child: Container(
-                  width: 40,
-                  alignment: Alignment.center,
-                  child: Icon(
-                    Icons.star,
-                    size: 34,
-                    color: news.isFavorite == true ? Colors.amber : Colors.black12,
-                  ),
-                ),
-              ),
+              trailing: StarWidget(item: Provider.of<News>(context).selectedItem),
               onTap: () {
                 Provider.of<News>(context).selectedItem = i;
                 Navigator.of(context).push(
