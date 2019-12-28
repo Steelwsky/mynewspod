@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'controller.dart';
+import 'news_model.dart';
 import 'package:mynewspod/expanded_news_widget.dart';
 
 class NewsPage extends StatelessWidget {
@@ -9,11 +9,10 @@ class NewsPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          Provider.of<News>(context).selectedItem.title,
+          Provider.of<NewsModel>(context).selectedItem.title,
         ),
       ),
       body: SafeArea(child: ExpandedNews()),
     );
   }
-
 }

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'controller.dart';
+import 'news_model.dart';
 
 class ExpandedNews extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final news = Provider.of<News>(context);
+    final news = Provider.of<NewsModel>(context);
     return Column(
       children: [
         Flexible(

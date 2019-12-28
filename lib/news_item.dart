@@ -3,17 +3,19 @@ import 'package:mynewspod/news_page.dart';
 import 'package:mynewspod/star_widget.dart';
 import 'package:webfeed/domain/atom_feed.dart';
 import 'package:webfeed/domain/rss_feed.dart';
-import 'controller.dart';
+import 'package:webfeed/domain/rss_item.dart';
+import 'news_model.dart';
 import 'package:provider/provider.dart';
 
 class NewsItems extends StatelessWidget {
-  NewsItems({Key key, this.rssFeed}) : super(key: key);
+  NewsItems({Key key, this.rssFeed, this.rssItem}) : super(key: key);
   final RssFeed rssFeed;
+  final RssItem rssItem;
 
   @override
   Widget build(BuildContext context) {
 //    var changer = false;
-    final news = Provider.of<News>(context);
+    final news = Provider.of<NewsModel>(context);
     return ListView(
       padding: const EdgeInsets.only(left: 8, top: 8, right: 8, bottom: 8),
       children: rssFeed.items
@@ -29,9 +31,12 @@ class NewsItems extends StatelessWidget {
                 overflow: TextOverflow.ellipsis,
                 style: TextStyle(fontSize: 16),
               ),
-              trailing: StarWidget(item: Provider.of<News>(context).selectedItem),
+              trailing: StarWidget(
+                item: news.selectedItem,
+                isFavorite: news.isFavorite,
+              ),
               onTap: () {
-                Provider.of<News>(context).selectedItem = i;
+                Provider.of<NewsModel>(context).selectedItem = i;
                 Navigator.of(context).push(
                   MaterialPageRoute(builder: (_) => NewsPage()),
                 );

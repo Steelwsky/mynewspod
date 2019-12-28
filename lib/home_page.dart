@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'controller.dart';
+import 'news_model.dart';
 import 'news_item.dart';
 import 'package:mynewspod/my_bottom_nav_bar.dart';
 
@@ -16,7 +16,7 @@ class MyHomePage extends StatelessWidget {
           Flexible(
             flex: 9,
             child: Container(
-              child: Consumer<News>(builder: (context, news, _) {
+              child: Consumer<NewsModel>(builder: (context, news, _) {
                         return news.feed != null
                             ? NewsItems(rssFeed: news.feed)
                             : Center(
