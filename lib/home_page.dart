@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'news_model.dart';
-import 'news_item.dart';
+import 'models/news_model.dart';
+import 'widgets/news_items.dart';
 import 'package:mynewspod/my_bottom_nav_bar.dart';
+
 
 class MyHomePage extends StatelessWidget {
   @override
@@ -25,7 +26,6 @@ class MyHomePage extends StatelessWidget {
                       }),
             ),
           ),
-//        Flexible(child: Placeholder(), flex: 1,),
         ],
       ),
       bottomNavigationBar: MyBottomNavigationBar(),

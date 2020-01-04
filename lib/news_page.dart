@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'news_model.dart';
-import 'package:mynewspod/expanded_news_widget.dart';
+import 'models/news_model.dart';
+import 'package:mynewspod/widgets/expanded_news_widget.dart';
 
 class NewsPage extends StatelessWidget {
   @override

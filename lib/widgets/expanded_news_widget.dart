@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'news_model.dart';
+import '../models/news_model.dart';
 
 class ExpandedNews extends StatelessWidget {
   @override
@@ -8,9 +8,7 @@ class ExpandedNews extends StatelessWidget {
     final news = Provider.of<NewsModel>(context);
     return Column(
       children: [
-        Flexible(
-            flex: 8,
-            child: SingleChildScrollView(
+            SingleChildScrollView(
               child: Column(children: [
 //                Image.network(news.feed.image.url),
                 Padding(
@@ -21,14 +19,7 @@ class ExpandedNews extends StatelessWidget {
                   ),
                 ),
               ]),
-            )),
-//        Flexible(
-//          flex: 2,
-//          child: Material(
-//            elevation: 12,
-//            child: Placeholder(),
-//          ),
-//        ),
+            )
       ],
     );
   }

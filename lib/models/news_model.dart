@@ -2,7 +2,7 @@ import 'package:http/http.dart' as http;
 import 'package:webfeed/webfeed.dart';
 import 'package:flutter/foundation.dart';
 
-//final url = 'http://www.bbc.co.uk/music/genres/rockandindie/reviews.rss';
+//final urlBbc = 'http://www.bbc.co.uk/music/genres/rockandindie/reviews.rss';
 //final url = 'https://itsallwidgets.com/podcast/feed';
 final url = 'http://www.cnbc.com/id/19789731/device/rss/rss.xml';
 
@@ -16,7 +16,11 @@ class NewsModel extends ChangeNotifier {
 
   RssItem get selectedItem => _selectedItem;
 
-  RssItem getById(int id) => RssItem();
+  RssItem getById(int id) => _feed.items.elementAt(id);
+
+  RssItem getByPosition(int position) {
+    return getById(position);
+  }
 
   set selectedItem(RssItem value) {
     _selectedItem = value;
@@ -30,12 +34,20 @@ class NewsModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  void favoriteChanger(RssItem item) {
-    _selectedItem = item;
-    isFavorite = !isFavorite;
-    notifyListeners();
-  }
+//  void parseBbc() async {
+//    final res = await http.get(urlBbc);
+//    final xmlStr = res.body;
+//    _feed = RssFeed.parse(xmlStr);
+//    notifyListeners();
+//  }
+
+//  void favoriteChanger(RssItem rssItem, bool isFav) {
+//    isFavorite = !isFav;
+//    notifyListeners();
+//    print('rssItem: ${rssItem.hashCode}, isFavorite: $isFavorite, and isFav: $isFav');
+//  }
 }
+
 //@immutable
 //class Item {
 //  final int id;

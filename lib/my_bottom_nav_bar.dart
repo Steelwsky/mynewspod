@@ -17,11 +17,7 @@ class _MyBottomNavigationBar extends State<MyBottomNavigationBar> {
       style: optionStyle,
     ),
     Text(
-      'Index 1: Business',
-      style: optionStyle,
-    ),
-    Text(
-      'Index 2: School',
+      'Index 1: Favorites',
       style: optionStyle,
     ),
   ];
@@ -41,16 +37,12 @@ class _MyBottomNavigationBar extends State<MyBottomNavigationBar> {
             title: Text('Home'),
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.business),
-            title: Text('Business'),
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.school),
-            title: Text('School'),
+            icon: Icon(Icons.star),
+            title: Text('Favorites'),
           ),
         ],
         currentIndex: _selectedIndex,
-        selectedItemColor: Colors.amber[800],
+        selectedItemColor: Colors.blue,
         onTap: _onItemTapped,
       );
   }
