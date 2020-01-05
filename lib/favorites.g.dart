@@ -8,7 +8,7 @@ part of 'favorites.dart';
 
 // ignore_for_file: unnecessary_brace_in_string_interps, unnecessary_this
 class Favorite extends DataClass implements Insertable<Favorite> {
-  final int id;
+  final String id;
   final String title;
   final String content;
   final String link;
@@ -20,10 +20,9 @@ class Favorite extends DataClass implements Insertable<Favorite> {
   factory Favorite.fromData(Map<String, dynamic> data, GeneratedDatabase db,
       {String prefix}) {
     final effectivePrefix = prefix ?? '';
-    final intType = db.typeSystem.forDartType<int>();
     final stringType = db.typeSystem.forDartType<String>();
     return Favorite(
-      id: intType.mapFromDatabaseResponse(data['${effectivePrefix}id']),
+      id: stringType.mapFromDatabaseResponse(data['${effectivePrefix}id']),
       title:
           stringType.mapFromDatabaseResponse(data['${effectivePrefix}title']),
       content:
@@ -34,7 +33,7 @@ class Favorite extends DataClass implements Insertable<Favorite> {
   factory Favorite.fromJson(Map<String, dynamic> json,
       {ValueSerializer serializer = const ValueSerializer.defaults()}) {
     return Favorite(
-      id: serializer.fromJson<int>(json['id']),
+      id: serializer.fromJson<String>(json['id']),
       title: serializer.fromJson<String>(json['title']),
       content: serializer.fromJson<String>(json['content']),
       link: serializer.fromJson<String>(json['link']),
@@ -44,7 +43,7 @@ class Favorite extends DataClass implements Insertable<Favorite> {
   Map<String, dynamic> toJson(
       {ValueSerializer serializer = const ValueSerializer.defaults()}) {
     return <String, dynamic>{
-      'id': serializer.toJson<int>(id),
+      'id': serializer.toJson<String>(id),
       'title': serializer.toJson<String>(title),
       'content': serializer.toJson<String>(content),
       'link': serializer.toJson<String>(link),
@@ -64,7 +63,7 @@ class Favorite extends DataClass implements Insertable<Favorite> {
     );
   }
 
-  Favorite copyWith({int id, String title, String content, String link}) =>
+  Favorite copyWith({String id, String title, String content, String link}) =>
       Favorite(
         id: id ?? this.id,
         title: title ?? this.title,
@@ -96,7 +95,7 @@ class Favorite extends DataClass implements Insertable<Favorite> {
 }
 
 class FavoritesCompanion extends UpdateCompanion<Favorite> {
-  final Value<int> id;
+  final Value<String> id;
   final Value<String> title;
   final Value<String> content;
   final Value<String> link;
@@ -107,7 +106,7 @@ class FavoritesCompanion extends UpdateCompanion<Favorite> {
     this.link = const Value.absent(),
   });
   FavoritesCompanion.insert({
-    @required int id,
+    @required String id,
     @required String title,
     @required String content,
     @required String link,
@@ -116,7 +115,7 @@ class FavoritesCompanion extends UpdateCompanion<Favorite> {
         content = Value(content),
         link = Value(link);
   FavoritesCompanion copyWith(
-      {Value<int> id,
+      {Value<String> id,
       Value<String> title,
       Value<String> content,
       Value<String> link}) {
@@ -135,11 +134,11 @@ class $FavoritesTable extends Favorites
   final String _alias;
   $FavoritesTable(this._db, [this._alias]);
   final VerificationMeta _idMeta = const VerificationMeta('id');
-  GeneratedIntColumn _id;
+  GeneratedTextColumn _id;
   @override
-  GeneratedIntColumn get id => _id ??= _constructId();
-  GeneratedIntColumn _constructId() {
-    return GeneratedIntColumn('id', $tableName, false,
+  GeneratedTextColumn get id => _id ??= _constructId();
+  GeneratedTextColumn _constructId() {
+    return GeneratedTextColumn('id', $tableName, false,
         $customConstraints: 'UNIQUE');
   }
 
@@ -229,7 +228,7 @@ class $FavoritesTable extends Favorites
   Map<String, Variable> entityToSql(FavoritesCompanion d) {
     final map = <String, Variable>{};
     if (d.id.present) {
-      map['id'] = Variable<int, IntType>(d.id.value);
+      map['id'] = Variable<String, StringType>(d.id.value);
     }
     if (d.title.present) {
       map['title'] = Variable<String, StringType>(d.title.value);

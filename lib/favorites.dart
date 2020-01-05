@@ -10,7 +10,8 @@ part 'favorites.g.dart';
 // this will generate a table called "todos" for us. The rows of that table will
 // be represented by a class called "Todo".
 class Favorites extends Table {
-  IntColumn get id => integer().customConstraint('UNIQUE')();
+//  IntColumn get id => integer().customConstraint('UNIQUE')();
+  TextColumn get id => text()();
 
   TextColumn get title => text()();
 
@@ -24,32 +25,34 @@ class Favorites extends Table {
 @UseMoor(tables: [Favorites])
 class MyDatabase extends _$MyDatabase {
   MyDatabase()
-      : super(FlutterQueryExecutor.inDatabaseFolder(path: 'db.sqlite'));
+      : super(FlutterQueryExecutor.inDatabaseFolder(path: 'db5.sqlite'));
 
   // you should bump this number whenever you change or add a table definition. Migrations
   // are covered later in this readme.
   @override
   int get schemaVersion => 1;
 
+
   Future<List<Favorite>> get allFavorites => select(favorites).get();
   NewsModel newsModel;
 
   void addFavorite(RssItem f) {
     var favorite = Favorite(
-      id: newsModel.selectedItem.hashCode,
-      title: newsModel.selectedItem.title,
-      content: newsModel.selectedItem.description,
-      link: newsModel.selectedItem.link,);
+      id: f.guid,
+      title: f.title,
+      content: f.description,
+      link: f.link,);
     into(favorites).insert(favorite);
   }
 
-  void removeFavorite(int id) => (delete(favorites)..where((t) => t.id.equals(id))).go();
+  void removeFavorite(String id) => (delete(favorites)..where((t) => t.id.equals(id))).go();
 
   // watches all todo entries in a given category. The stream will automatically
   // emit new items whenever the underlying data changes.
-  Stream<bool> isFavorite(int id) {
+  Stream<bool> isFavorite(String id) {
     return (select(favorites)..where((favorite) => favorite.id.equals(id)))
         .watch()
         .map((favoritesList) => favoritesList.length >= 1);
   }
+
 }

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:mynewspod/news_page.dart';
-import 'package:mynewspod/widgets/star_widget.dart';
 import 'package:webfeed/domain/rss_feed.dart';
 import 'package:webfeed/domain/rss_item.dart';
 import '../models/news_model.dart';
@@ -14,11 +13,15 @@ class NewsItems extends StatelessWidget {
   bool isFav;
   Color color = Colors.black12;
 
+  void printFavs(BuildContext context) async {
+    print(await Provider.of<MyDatabase>(context).allFavorites);
+  }
+
   @override
   Widget build(BuildContext context) {
-//    var favs = Provider.of<FavoriteModel>(context);
     var myDatabase =  Provider.of<MyDatabase>(context);
     final news = Provider.of<NewsModel>(context);
+    printFavs(context);
     return RefreshIndicator(
       key: Key('refreshKey'),
       onRefresh: () async {
@@ -45,17 +48,20 @@ class NewsItems extends StatelessWidget {
                  Container(
                    width: 40,
                    child: StreamBuilder<bool>(
-                    stream: myDatabase.isFavorite(news.selectedItem.hashCode),
+                    stream: myDatabase.isFavorite(i.guid),
                     builder: (context, snapshot) {
                       if (snapshot.hasData && snapshot.data) {
                         return IconButton(
                           icon: Icon(Icons.star, size: 34, color:  Colors.amber),
-                          onPressed: () => myDatabase.removeFavorite(news.selectedItem.hashCode),
+                          onPressed: () => myDatabase.removeFavorite(i.guid),
                         );
-                      }
+                      } else
                       return IconButton(
                         icon: Icon(Icons.star, size: 34, color:  Colors.black12),
-                        onPressed: () => myDatabase.addFavorite(news.selectedItem),
+                        onPressed: () {
+//                          print('rssItem: ${i.title}');
+                          myDatabase.addFavorite(i);
+                        },
                       );
                     }
                 )
