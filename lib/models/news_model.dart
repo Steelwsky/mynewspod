@@ -16,11 +16,11 @@ class NewsModel extends ChangeNotifier {
 
   RssItem get selectedItem => _selectedItem;
 
-  RssItem getById(int id) => _feed.items.elementAt(id);
-
-  RssItem getByPosition(int position) {
-    return getById(position);
-  }
+//  RssItem getById(int id) => _feed.items.elementAt(id);
+//
+//  RssItem getByPosition(int position) {
+//    return getById(position);
+//  }
 
   set selectedItem(RssItem value) {
     _selectedItem = value;

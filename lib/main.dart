@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mynewspod/favorites.dart';
 import 'package:mynewspod/home_page.dart';
 import 'package:mynewspod/widgets/star_widget.dart';
 import 'package:provider/provider.dart';
@@ -14,6 +15,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (context) => NewsModel()..parse(),),
 //        Provider<StarController>(create: (_) => StarController(),)
 //        ChangeNotifierProvider(create: (_) => FavoriteModel(),)
+      Provider<MyDatabase>(create: (_) => MyDatabase()),
       ],
       child: MaterialApp(
           title: 'News Feed',

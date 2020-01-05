@@ -5,6 +5,7 @@ import 'package:webfeed/domain/rss_feed.dart';
 import 'package:webfeed/domain/rss_item.dart';
 import '../models/news_model.dart';
 import 'package:provider/provider.dart';
+import 'package:mynewspod/favorites.dart';
 
 class NewsItems extends StatelessWidget {
   NewsItems({Key key, this.rssFeed, this.rssItem}) : super(key: key);
@@ -16,6 +17,7 @@ class NewsItems extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 //    var favs = Provider.of<FavoriteModel>(context);
+    var myDatabase =  Provider.of<MyDatabase>(context);
     final news = Provider.of<NewsModel>(context);
     return RefreshIndicator(
       key: Key('refreshKey'),
@@ -39,13 +41,25 @@ class NewsItems extends StatelessWidget {
                   style: TextStyle(fontSize: 16),
                 ),
                 trailing:
-//              StreamBuilder<bool>(
-//                stream: null,
-//                builder: (context, snapshot) {
-//                  return IconButton(icon: Icon(Icons.star_border), onPressed: () => null);
-//                }
-//              ),
-                    StarWidget(),
+//                StarWidget(),
+                 Container(
+                   width: 40,
+                   child: StreamBuilder<bool>(
+                    stream: myDatabase.isFavorite(news.selectedItem.hashCode),
+                    builder: (context, snapshot) {
+                      if (snapshot.hasData && snapshot.data) {
+                        return IconButton(
+                          icon: Icon(Icons.star, size: 34, color:  Colors.amber),
+                          onPressed: () => myDatabase.removeFavorite(news.selectedItem.hashCode),
+                        );
+                      }
+                      return IconButton(
+                        icon: Icon(Icons.star, size: 34, color:  Colors.black12),
+                        onPressed: () => myDatabase.addFavorite(news.selectedItem),
+                      );
+                    }
+                )
+                 ),
                 onTap: () {
                   news.selectedItem = i;
                   Navigator.of(context).push(
