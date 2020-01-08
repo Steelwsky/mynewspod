@@ -11,16 +11,9 @@ class NewsModel extends ChangeNotifier {
   RssItem _selectedItem;
   bool isFavorite = false;
 
-//  bool get isFavorite => _isFavorite;
   RssFeed get feed => _feed;
 
   RssItem get selectedItem => _selectedItem;
-
-//  RssItem getById(int id) => _feed.items.elementAt(id);
-//
-//  RssItem getByPosition(int position) {
-//    return getById(position);
-//  }
 
   set selectedItem(RssItem value) {
     _selectedItem = value;
@@ -33,23 +26,4 @@ class NewsModel extends ChangeNotifier {
     _feed = RssFeed.parse(xmlStr);
     notifyListeners();
   }
-
-//  void parseBbc() async {
-//    final res = await http.get(urlBbc);
-//    final xmlStr = res.body;
-//    _feed = RssFeed.parse(xmlStr);
-//    notifyListeners();
-//  }
-
-//  void favoriteChanger(RssItem rssItem, bool isFav) {
-//    isFavorite = !isFav;
-//    notifyListeners();
-//    print('rssItem: ${rssItem.hashCode}, isFavorite: $isFavorite, and isFav: $isFav');
-//  }
 }
-
-//@immutable
-//class Item {
-//  final int id;
-//  final
-//}

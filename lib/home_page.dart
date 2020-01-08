@@ -4,7 +4,6 @@ import 'models/news_model.dart';
 import 'widgets/news_items.dart';
 import 'package:mynewspod/my_bottom_nav_bar.dart';
 
-
 class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -18,12 +17,12 @@ class MyHomePage extends StatelessWidget {
             flex: 9,
             child: Container(
               child: Consumer<NewsModel>(builder: (context, news, _) {
-                        return news.feed != null
-                            ? NewsItems(rssFeed: news.feed)
-                            : Center(
-                                child: CircularProgressIndicator(),
-                              );
-                      }),
+                return news.feed != null
+                    ? NewsItems(rssFeed: news.feed)
+                    : Center(
+                        child: CircularProgressIndicator(),
+                      );
+              }),
             ),
           ),
         ],

@@ -19,14 +19,14 @@ class NewsItems extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var myDatabase =  Provider.of<MyDatabase>(context);
+    var myDatabase = Provider.of<MyDatabase>(context);
     final news = Provider.of<NewsModel>(context);
     printFavs(context);
     return RefreshIndicator(
       key: Key('refreshKey'),
       onRefresh: () async {
         await Future.delayed(Duration(milliseconds: 100));
-        await news.parse();
+        news.parse();
       },
       child: ListView(
         padding: const EdgeInsets.only(left: 8, top: 8, right: 8, bottom: 8),
@@ -43,29 +43,27 @@ class NewsItems extends StatelessWidget {
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(fontSize: 16),
                 ),
-                trailing:
-//                StarWidget(),
-                 Container(
-                   width: 40,
-                   child: StreamBuilder<bool>(
-                    stream: myDatabase.isFavorite(i.guid),
-                    builder: (context, snapshot) {
-                      if (snapshot.hasData && snapshot.data) {
-                        return IconButton(
-                          icon: Icon(Icons.star, size: 34, color:  Colors.amber),
-                          onPressed: () => myDatabase.removeFavorite(i.guid),
-                        );
-                      } else
-                      return IconButton(
-                        icon: Icon(Icons.star, size: 34, color:  Colors.black12),
-                        onPressed: () {
-//                          print('rssItem: ${i.title}');
-                          myDatabase.addFavorite(i);
-                        },
-                      );
-                    }
-                )
-                 ),
+                trailing: Container(
+                    width: 40,
+                    child: StreamBuilder<bool>(
+                        stream: myDatabase.isFavorite(i.guid),
+                        builder: (context, snapshot) {
+                          if (snapshot.hasData && snapshot.data) {
+                            return IconButton(
+                              icon: Icon(Icons.star,
+                                  size: 34, color: Colors.amber),
+                              onPressed: () =>
+                                  myDatabase.removeFavorite(i.guid),
+                            );
+                          } else
+                            return IconButton(
+                              icon: Icon(Icons.star,
+                                  size: 34, color: Colors.black12),
+                              onPressed: () {
+                                myDatabase.addFavorite(i);
+                              },
+                            );
+                        })),
                 onTap: () {
                   news.selectedItem = i;
                   Navigator.of(context).push(
@@ -79,45 +77,3 @@ class NewsItems extends StatelessWidget {
     );
   }
 }
-
-//class MyStarIcon extends StatelessWidget {
-//  const MyStarIcon({
-//    Key key,
-//    @required this.item,
-//    @required this.color,
-//  }) : super(key: key);
-//
-//  final RssItem item;
-//  final Color color;
-//
-//  @override
-//  Widget build(BuildContext context) {
-//    var news = Provider.of<NewsModel>(context);
-//    return Icon(
-//        Icons.star,
-//        size: 34,
-//        color: color,
-//    );
-//  }
-//}
-
-//
-//Container(
-//width: 50,
-//child: IconButton(
-//icon: MyStarIcon(item: i, color: color,),
-//onPressed: () {
-//news.favoriteChanger(i, isFav);
-//if((isFav == true)) {
-//color = Colors.amber;
-//print('isFavFALSE: $isFav');
-//isFav = false;
-//return;
-//} else {
-//color = Colors.black12;
-//isFav = true;
-//print('isFavTRUE: $isFav');
-//}
-//},
-//),
-//),

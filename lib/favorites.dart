@@ -1,6 +1,5 @@
 import 'package:moor_flutter/moor_flutter.dart';
 import 'package:mynewspod/models/news_model.dart';
-import 'package:mynewspod/news_page.dart';
 import 'package:webfeed/domain/rss_item.dart';
 
 // assuming that your file is called filename.dart. This will give an error at first,
@@ -32,7 +31,6 @@ class MyDatabase extends _$MyDatabase {
   @override
   int get schemaVersion => 1;
 
-
   Future<List<Favorite>> get allFavorites => select(favorites).get();
   NewsModel newsModel;
 
@@ -41,18 +39,21 @@ class MyDatabase extends _$MyDatabase {
       id: f.guid,
       title: f.title,
       content: f.description,
-      link: f.link,);
+      link: f.link,
+    );
     into(favorites).insert(favorite);
   }
 
-  void removeFavorite(String id) => (delete(favorites)..where((t) => t.id.equals(id))).go();
+  void removeFavorite(String id) =>
+      (delete(favorites)..where((t) => t.id.equals(id))).go();
 
   // watches all todo entries in a given category. The stream will automatically
   // emit new items whenever the underlying data changes.
   Stream<bool> isFavorite(String id) {
-    return (select(favorites)..where((favorite) => favorite.id.equals(id)))
-        .watch()
-        .map((favoritesList) => favoritesList.length >= 1);
+    return select(favorites).watch().map((favoritesList) =>
+        favoritesList.where((favorite) => favorite.id == id).length >= 1);
+//    return (select(favorites)..where((favorite) => favorite.id.equals(id)))
+//        .watch()
+//        .map((favoritesList) => favoritesList.length >= 1);
   }
-
 }
