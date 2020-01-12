@@ -4,9 +4,10 @@ import 'package:mynewspod/controllers/news_model.dart';
 import 'package:mynewspod/widgets/news_items.dart';
 
 class NewStories extends StatelessWidget {
+  final int index;
   const NewStories({
     Key key,
-    String tabName,
+    @required this.index,
   }) : super(key: key);
 
   @override
@@ -17,7 +18,7 @@ class NewStories extends StatelessWidget {
           flex: 9,
           child: Container(
             child: Consumer<NewsModel>(builder: (context, news, _) {
-              return news.feed != null ? NewsItems(rssFeed: news.feed) : Center(child: CircularProgressIndicator());
+              return news.feed != null ? NewsItems(rssFeed: news.feed, index: index,) : Center(child: CircularProgressIndicator());
             }),
           ),
         ),

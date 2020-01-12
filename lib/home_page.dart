@@ -1,30 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:mynewspod/controllers/controller_bottom_nav_bar.dart';
 import 'package:mynewspod/widgets/my_bottom_nav_bar.dart';
-import 'screens/new_stories.dart';
-import 'screens/favorite_page.dart';
 import 'package:provider/provider.dart';
 
 class MyHomePage extends StatelessWidget {
 
-  static const List<Widget> screenOptions = <Widget>[
-    NewStories(tabName: 'New stories'),
-    FavoritePage(tabName: 'Favorite stories')
-  ];
-  
-  static const List<String> titlesOfScreens = [
-    
-  ];
-
   @override
   Widget build(BuildContext context) {
     final bnbController = Provider.of<BottomNavBarController>(context);
+    final tabNotifier = Provider.of<TabNotifier>(context);
+    final tabs = tabNotifier.tabs;
+
     return ValueListenableBuilder<int>(
       valueListenable: bnbController.state,
       builder: (_, newState, __) {
         return Scaffold(
           appBar: AppBar(
-            title: screenOptions.indexOf(screenOptions.elementAt(newState)) == 0 ? Text('New stories') : Text('Favorite stories'),
+            title: Text(tabs.elementAt(bnbController.state.value).tabName),
           ),
           body: screenOptions.elementAt(newState),
           bottomNavigationBar: MyBottomNavigationBar(),

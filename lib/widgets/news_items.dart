@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:mynewspod/widgets/selected_news_page.dart';
 import 'package:webfeed/domain/rss_feed.dart';
-import 'package:webfeed/domain/rss_item.dart';
 import '../controllers/news_model.dart';
 import 'package:provider/provider.dart';
 import 'package:mynewspod/favorites.dart';
 
 class NewsItems extends StatelessWidget {
-  NewsItems({Key key, this.rssFeed, this.rssItem}) : super(key: key);
+  NewsItems({Key key, this.rssFeed, this.index}) : super(key: key);
   final RssFeed rssFeed;
-  final RssItem rssItem;
+  final int index;
   bool isFav;
   Color color = Colors.black12;
 
@@ -29,10 +28,12 @@ class NewsItems extends StatelessWidget {
         news.parse();
       },
       child: ListView(
+        key: PageStorageKey(index),
         padding: const EdgeInsets.only(left: 8, top: 8, right: 8, bottom: 8),
         children: rssFeed.items
             .map(
               (i) => ListTile(
+                key: PageStorageKey(i.guid),
                 title: Text(
                   i.title,
                   style: TextStyle(fontSize: 18),

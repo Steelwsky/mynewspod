@@ -8,23 +8,19 @@ class MyBottomNavigationBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final bnbController = Provider.of<BottomNavBarController>(context);
-       return BottomNavigationBar(
-            items: const <BottomNavigationBarItem>[
-              BottomNavigationBarItem(
-                icon: Icon(Icons.home),
-                title: Text('Home'),
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.star),
-                title: Text('Favorites'),
-              ),
-            ],
-            currentIndex: bnbController.state.value,
-            selectedItemColor: Colors.blue,
-            onTap: (index) {
-              bnbController.onItemTapped(index);
-            }
-       );
-      }
+    final tabNotifier = Provider.of<TabNotifier>(context);
+    return BottomNavigationBar(
+        items: [
+          for (final tab in tabNotifier.tabs)
+            BottomNavigationBarItem(
+              icon: tab.icon,
+              title: Text(tab.tabName),
+            )
+        ],
+        currentIndex: bnbController.state.value,
+        selectedItemColor: Colors.blue,
+        onTap: (index) {
+          bnbController.onItemTapped(index);
+        });
   }
-
+}
