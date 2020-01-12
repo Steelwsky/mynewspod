@@ -7,9 +7,9 @@ import 'package:provider/provider.dart';
 import 'package:mynewspod/favorites.dart';
 
 class NewsItems extends StatelessWidget {
-  NewsItems({Key key, this.rssFeed, this.rssItem}) : super(key: key);
+  NewsItems({Key key, this.rssFeed, this.index}) : super(key: key);
   final RssFeed rssFeed;
-  final RssItem rssItem;
+  final int index;
   bool isFav;
   Color color = Colors.black12;
 
@@ -29,6 +29,7 @@ class NewsItems extends StatelessWidget {
         news.parse();
       },
       child: ListView(
+        key: PageStorageKey(index),
         padding: const EdgeInsets.only(left: 8, top: 8, right: 8, bottom: 8),
         children: rssFeed.items
             .map(

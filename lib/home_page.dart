@@ -8,13 +8,10 @@ import 'package:provider/provider.dart';
 class MyHomePage extends StatelessWidget {
 
   static const List<Widget> screenOptions = <Widget>[
-    NewStories(tabName: 'New stories'),
-    FavoritePage(tabName: 'Favorite stories')
+    NewStories(index: 0),
+    FavoritePage(index: 1)
   ];
-  
-  static const List<String> titlesOfScreens = [
-    
-  ];
+
 
   @override
   Widget build(BuildContext context) {

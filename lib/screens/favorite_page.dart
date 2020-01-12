@@ -6,7 +6,7 @@ import 'package:mynewspod/widgets/selected_news_page.dart';
 class FavoritePage extends StatelessWidget {
   const FavoritePage({
     Key key,
-    String tabName,
+    int index,
   }) : super(key: key);
 
   @override

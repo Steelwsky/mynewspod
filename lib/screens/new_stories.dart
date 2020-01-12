@@ -6,7 +6,7 @@ import 'package:mynewspod/widgets/news_items.dart';
 class NewStories extends StatelessWidget {
   const NewStories({
     Key key,
-    String tabName,
+    int index,
   }) : super(key: key);
 
   @override
