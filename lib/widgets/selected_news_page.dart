@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'models/news_model.dart';
+import '../controllers/news_model.dart';
 import 'package:mynewspod/widgets/expanded_news_widget.dart';
 
-class NewsPage extends StatelessWidget {
+class SelectedNewsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

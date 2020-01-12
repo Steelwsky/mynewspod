@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
-import '../models/news_model.dart';
+import '../controllers/news_model.dart';
 
 class ExpandedNews extends StatelessWidget {
   @override

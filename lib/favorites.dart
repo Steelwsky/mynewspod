@@ -1,5 +1,5 @@
 import 'package:moor_flutter/moor_flutter.dart';
-import 'package:mynewspod/models/news_model.dart';
+import 'package:mynewspod/controllers/news_model.dart';
 import 'package:webfeed/domain/rss_item.dart';
 
 // assuming that your file is called filename.dart. This will give an error at first,
@@ -32,6 +32,9 @@ class MyDatabase extends _$MyDatabase {
   int get schemaVersion => 1;
 
   Future<List<Favorite>> get allFavorites => select(favorites).get();
+
+  Stream<List<Favorite>> watchAllFavorites() => select(favorites).watch();
+
   NewsModel newsModel;
 
   void addFavorite(RssItem f) {

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:mynewspod/news_page.dart';
+import 'package:mynewspod/widgets/selected_news_page.dart';
 import 'package:webfeed/domain/rss_feed.dart';
 import 'package:webfeed/domain/rss_item.dart';
-import '../models/news_model.dart';
+import '../controllers/news_model.dart';
 import 'package:provider/provider.dart';
 import 'package:mynewspod/favorites.dart';
 
@@ -67,7 +67,7 @@ class NewsItems extends StatelessWidget {
                 onTap: () {
                   news.selectedItem = i;
                   Navigator.of(context).push(
-                    MaterialPageRoute(builder: (_) => NewsPage()),
+                    MaterialPageRoute(builder: (_) => SelectedNewsPage()),
                   );
                 },
               ),
