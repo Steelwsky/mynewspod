@@ -6,7 +6,11 @@ import 'package:provider/provider.dart';
 import 'package:mynewspod/favorites.dart';
 
 class NewsItems extends StatelessWidget {
-  NewsItems({Key key, this.rssFeed, this.index}) : super(key: key);
+  NewsItems({
+    Key key,
+    this.rssFeed,
+    this.index,
+  }) : super(key: key);
   final RssFeed rssFeed;
   final int index;
   bool isFav;

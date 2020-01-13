@@ -15,9 +15,11 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (context) => NewsModel()..parse(),
         ),
-        Provider<BottomNavBarController>(create: (_) => BottomNavBarController()),
-        Provider<TabNotifier>(create: (_) => TabNotifier(),),
-//        ChangeNotifierProvider(create: (_) => BottomNavBarController(Provider.of<LoadingTabsCount>(context))),
+        Provider<BottomNavBarController>(
+            create: (_) => BottomNavBarController()),
+        ChangeNotifierProvider<TabNotifier>(
+          create: (_) => TabNotifier(),
+        ),
         Provider<MyDatabase>(create: (_) => MyDatabase()),
       ],
       child: MaterialApp(

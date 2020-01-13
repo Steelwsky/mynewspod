@@ -18,7 +18,12 @@ class NewStories extends StatelessWidget {
           flex: 9,
           child: Container(
             child: Consumer<NewsModel>(builder: (context, news, _) {
-              return news.feed != null ? NewsItems(rssFeed: news.feed, index: index,) : Center(child: CircularProgressIndicator());
+              return news.feed != null
+                  ? NewsItems(
+                      rssFeed: news.feed,
+                      index: index,
+                    )
+                  : Center(child: CircularProgressIndicator());
             }),
           ),
         ),

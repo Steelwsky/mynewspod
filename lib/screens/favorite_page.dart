@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mynewspod/controllers/news_model.dart';
 import 'package:mynewspod/favorites.dart';
 import 'package:provider/provider.dart';
 import 'package:mynewspod/widgets/selected_news_page.dart';
@@ -14,6 +15,7 @@ class FavoritePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var myDatabase = Provider.of<MyDatabase>(context);
+//    final news = Provider.of<NewsModel>(context);
     return Column(
       children: <Widget>[
         Flexible(
@@ -64,7 +66,8 @@ class FavoritePage extends StatelessWidget {
                                         );
                                     })),
                             onTap: () {
-//                    news.selectedItem = i;
+//                              favs[index];
+
                               Navigator.of(context).push(
                                 MaterialPageRoute(
                                     builder: (_) => SelectedNewsPage()),

@@ -1,6 +1,7 @@
 import 'dart:collection';
-
 import 'package:flutter/material.dart';
+import 'package:mynewspod/screens/favorite_page.dart';
+import 'package:mynewspod/screens/new_stories.dart';
 
 class BottomNavBarController {
   final ValueNotifier<int> state =
@@ -13,10 +14,6 @@ class BottomNavBarController {
 }
 
 class TabModel with ChangeNotifier {
-//  static  List<Widget> screenOptions = <Widget>[
-//    NewStories(index: 0),
-//    FavoritePage(index: 1)
-//  ];
 //  final int index;
   final StoriesType storiesType;
   final String tabName;
@@ -26,7 +23,7 @@ class TabModel with ChangeNotifier {
   TabModel({this.storiesType, this.tabName, this.bottomName, this.icon});
 }
 
-class TabNotifier with ChangeNotifier{
+class TabNotifier with ChangeNotifier {
   List<TabModel> _tabs;
 
   TabNotifier() {
@@ -46,6 +43,17 @@ class TabNotifier with ChangeNotifier{
     ];
   }
 
+  List<Widget> _screenOptions = <Widget>[
+    NewStories(
+      index: 0,
+    ),
+    FavoritePage(
+      index: 1,
+    )
+  ];
+
+  UnmodifiableListView<Widget> get screenOptions =>
+      UnmodifiableListView(_screenOptions);
 
   UnmodifiableListView<TabModel> get tabs => UnmodifiableListView(_tabs);
 }

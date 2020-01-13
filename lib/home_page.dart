@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:mynewspod/controllers/controller_bottom_nav_bar.dart';
+import 'package:mynewspod/screens/favorite_page.dart';
+import 'package:mynewspod/screens/new_stories.dart';
 import 'package:mynewspod/widgets/my_bottom_nav_bar.dart';
 import 'package:provider/provider.dart';
 
-class MyHomePage extends StatelessWidget {
+//TODO implement common model for screens,
+// but it's a bit strange due to different approach is used in favorite page: db data, not rssFeed/rssItems.
+//TODO start with list of screens.
 
+class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final bnbController = Provider.of<BottomNavBarController>(context);
@@ -18,12 +23,10 @@ class MyHomePage extends StatelessWidget {
           appBar: AppBar(
             title: Text(tabs.elementAt(bnbController.state.value).tabName),
           ),
-          body: screenOptions.elementAt(newState),
+          body: tabNotifier.screenOptions.elementAt(newState),
           bottomNavigationBar: MyBottomNavigationBar(),
         );
       },
     );
   }
 }
-
-
