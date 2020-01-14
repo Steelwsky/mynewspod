@@ -72,7 +72,7 @@ class NewsItems extends StatelessWidget {
                 onTap: () {
                   news.selectedItem = i;
                   Navigator.of(context).push(
-                    MaterialPageRoute(builder: (_) => SelectedNewsPage()),
+                    MaterialPageRoute(builder: (_) => SelectedNewsPage(index: index)),
                   );
                 },
               ),

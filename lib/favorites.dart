@@ -33,7 +33,19 @@ class MyDatabase extends _$MyDatabase {
 
   Future<List<Favorite>> get allFavorites => select(favorites).get();
 
+//  Future<List<Favorite>> get selectedFavorite => select(favorites.).get();
+
   Stream<List<Favorite>> watchAllFavorites() => select(favorites).watch();
+
+  Stream<Favorite> entryById(String id) {
+    return (select(favorites)..where((favorite) => favorite.id.equals(id))).watchSingle();
+  }
+
+  /*
+  select favorite.title from favorite
+  where favorite.id = '000132'
+
+   */
 
   NewsModel newsModel;
 
@@ -55,8 +67,5 @@ class MyDatabase extends _$MyDatabase {
   Stream<bool> isFavorite(String id) {
     return select(favorites).watch().map((favoritesList) =>
         favoritesList.where((favorite) => favorite.id == id).length >= 1);
-//    return (select(favorites)..where((favorite) => favorite.id.equals(id)))
-//        .watch()
-//        .map((favoritesList) => favoritesList.length >= 1);
   }
 }

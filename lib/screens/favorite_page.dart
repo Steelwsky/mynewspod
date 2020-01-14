@@ -66,7 +66,7 @@ class FavoritePage extends StatelessWidget {
                                         );
                                     })),
                             onTap: () {
-//                              favs[index];
+                              favItem.id;
 
                               Navigator.of(context).push(
                                 MaterialPageRoute(
