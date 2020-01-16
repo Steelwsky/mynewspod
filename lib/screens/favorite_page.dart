@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mynewspod/controllers/news_model.dart';
 import 'package:mynewspod/favorites.dart';
+import 'package:mynewspod/widgets/selected_fav_page.dart';
 import 'package:provider/provider.dart';
 import 'package:mynewspod/widgets/selected_news_page.dart';
 
@@ -66,11 +67,9 @@ class FavoritePage extends StatelessWidget {
                                         );
                                     })),
                             onTap: () {
-                              favItem.id;
-
                               Navigator.of(context).push(
                                 MaterialPageRoute(
-                                    builder: (_) => SelectedNewsPage()),
+                                    builder: (_) => SelectedFavPage(id: favItem.id)),
                               );
                             },
                           );
@@ -84,10 +83,3 @@ class FavoritePage extends StatelessWidget {
     );
   }
 }
-
-//onTap: () {
-//news.selectedItem = i;
-//Navigator.of(context).push(
-//MaterialPageRoute(builder: (_) => SelectedNewsPage()),
-//);
-//},

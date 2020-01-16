@@ -33,6 +33,8 @@ class MyDatabase extends _$MyDatabase {
 
   Future<List<Favorite>> get allFavorites => select(favorites).get();
 
+//  Future<List<Favorite>> get selectedFavorite => select(favorites).where((favorite) => favorite.id.equals(id))).get();
+
 //  Future<List<Favorite>> get selectedFavorite => select(favorites.).get();
 
   Stream<List<Favorite>> watchAllFavorites() => select(favorites).watch();

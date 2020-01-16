@@ -5,12 +5,8 @@ import '../controllers/news_model.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class SelectedNewsPage extends StatelessWidget {
-  final int index;
-  final String id;
-
   SelectedNewsPage({
     Key key,
-    this.index,
   }) : super(key: key);
 
   //TODO Add before Scaffold a conditional. it should check do we come from newStories page or favorite Page.
@@ -19,16 +15,10 @@ class SelectedNewsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var myDatabase = Provider.of<MyDatabase>(context);
     final news = Provider.of<NewsModel>(context);
     return Scaffold(
       appBar: AppBar(
-        title:
-        index == 0 ?
-        Text(
-          Provider.of<NewsModel>(context).selectedItem.title,
-        ) : Text(myDatabase.entryById(id).single.),
-      ),
+          title: Text(Provider.of<NewsModel>(context).selectedItem.title)),
       body: Column(
         children: [
           SingleChildScrollView(
@@ -51,12 +41,15 @@ class SelectedNewsPage extends StatelessWidget {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: <Widget>[
-                              Text('Continue in browser:', style: TextStyle(fontSize: 18),),
+                              Text(
+                                'Continue in browser:',
+                                style: TextStyle(fontSize: 18),
+                              ),
                               Icon(Icons.open_in_browser),
                             ],
                           ),
                           onPressed: () async {
-                            if(await canLaunch(news.selectedItem.link)) {
+                            if (await canLaunch(news.selectedItem.link)) {
                               launch(news.selectedItem.link);
                             }
                           },
