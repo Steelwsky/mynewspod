@@ -7,20 +7,18 @@ class MyBottomNavigationBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bnbController = Provider.of<BottomNavBarController>(context);
+    final bnbController = Provider.of<BottomNavBarController>(
+        context); // make this widget stful and
     final tabNotifier = Provider.of<TabNotifier>(context);
     return BottomNavigationBar(
         items: [
-          for (final tab in tabNotifier.tabs)
-            BottomNavigationBarItem(
-              icon: tab.icon,
-              title: Text(tab.tabName),
-            )
+          ...tabNotifier.tabs.map((tab) => BottomNavigationBarItem(
+                icon: tab.icon,
+                title: Text(tab.tabName),
+              ))
         ],
         currentIndex: bnbController.state.value,
         selectedItemColor: Colors.blue,
-        onTap: (index) {
-          bnbController.onItemTapped(index);
-        });
+        onTap: bnbController.onItemTapped);
   }
 }

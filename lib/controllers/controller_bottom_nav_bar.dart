@@ -2,6 +2,8 @@ import 'dart:collection';
 import 'package:flutter/material.dart';
 import 'package:mynewspod/screens/favorite_page.dart';
 import 'package:mynewspod/screens/new_stories.dart';
+import 'package:pedantic/pedantic.dart';
+
 
 class BottomNavBarController {
   final ValueNotifier<int> state =

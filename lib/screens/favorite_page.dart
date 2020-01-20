@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:mynewspod/controllers/news_model.dart';
 import 'package:mynewspod/favorites.dart';
 import 'package:mynewspod/widgets/selected_fav_page.dart';
 import 'package:provider/provider.dart';
-import 'package:mynewspod/widgets/selected_news_page.dart';
+import 'package:pedantic/pedantic.dart';
 
 class FavoritePage extends StatelessWidget {
   final int index;
@@ -15,7 +14,7 @@ class FavoritePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var myDatabase = Provider.of<MyDatabase>(context);
+    final myDatabase = Provider.of<MyDatabase>(context);
 //    final news = Provider.of<NewsModel>(context);
     return Column(
       children: <Widget>[
@@ -24,9 +23,10 @@ class FavoritePage extends StatelessWidget {
           child: Container(
             child: StreamBuilder(
               stream: myDatabase.watchAllFavorites(),
-              builder: (context, AsyncSnapshot<List<Favorite>> snapshot) {
+              // TODO function favorController (remove, add)
+              builder: (context, AsyncSnapshot<List<Favorite>> snapshot) { //<List<Favorite>> to <FavList>
                 final favs = snapshot.data ?? List();
-                return favs.length == 0
+                return favs.isEmpty
                     ? Text('There is no single story =/')
                     : ListView.builder(
                         key: PageStorageKey(index),
@@ -47,6 +47,7 @@ class FavoritePage extends StatelessWidget {
                             trailing: Container(
                                 width: 40,
                                 child: StreamBuilder<bool>(
+                                    //convert to ValueNotifier
                                     stream: myDatabase.isFavorite(favItem.id),
                                     builder: (context, snapshot) {
                                       if (snapshot.hasData && snapshot.data) {
@@ -56,20 +57,20 @@ class FavoritePage extends StatelessWidget {
                                           onPressed: () => myDatabase
                                               .removeFavorite(favItem.id),
                                         );
-                                      } else
+                                      } else {
                                         return IconButton(
-                                          icon: Icon(Icons.star,
-                                              size: 34, color: Colors.black12),
-                                          onPressed: () {
-                                            myDatabase
-                                                .removeFavorite(favItem.id);
-                                          },
-                                        );
+                                            icon: Icon(Icons.star,
+                                                size: 34,
+                                                color: Colors.black12),
+                                            onPressed: () => myDatabase
+                                                .removeFavorite(favItem.id));
+                                      }
                                     })),
                             onTap: () {
                               Navigator.of(context).push(
                                 MaterialPageRoute(
-                                    builder: (_) => SelectedFavPage(id: favItem.id)),
+                                    builder: (_) =>
+                                        SelectedFavPage(id: favItem.id)),
                               );
                             },
                           );

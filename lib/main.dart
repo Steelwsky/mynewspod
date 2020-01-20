@@ -3,7 +3,7 @@ import 'package:mynewspod/controllers/controller_bottom_nav_bar.dart';
 import 'package:mynewspod/favorites.dart';
 import 'package:mynewspod/home_page.dart';
 import 'package:provider/provider.dart';
-import 'controllers/news_model.dart';
+import 'controllers/news_controller.dart';
 
 void main() => runApp(MyApp());
 
@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(
-          create: (context) => NewsModel()..parse(),
+          create: (context) => NewsController()..fetchNews(),
         ),
         Provider<BottomNavBarController>(
             create: (_) => BottomNavBarController()),

@@ -1,5 +1,5 @@
 //import 'package:flutter/material.dart';
-//import 'package:mynewspod/models/news_model.dart';
+//import 'package:mynewspod/models/news_controller.dart';
 //import 'package:provider/provider.dart';
 //import 'package:mynewspod/favorites.dart';
 //

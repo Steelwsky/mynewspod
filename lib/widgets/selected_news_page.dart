@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mynewspod/favorites.dart';
 import 'package:provider/provider.dart';
-import '../controllers/news_model.dart';
+import '../controllers/news_controller.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class SelectedNewsPage extends StatelessWidget {
@@ -15,10 +15,10 @@ class SelectedNewsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final news = Provider.of<NewsModel>(context);
+    final news = Provider.of<NewsController>(context);
     return Scaffold(
       appBar: AppBar(
-          title: Text(Provider.of<NewsModel>(context).selectedItem.title)),
+//          title: Text(news.feed.items[2].title)), //TODO it's wrong.
       body: Column(
         children: [
           SingleChildScrollView(

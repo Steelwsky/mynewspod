@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mynewspod/widgets/selected_news_page.dart';
 import 'package:webfeed/domain/rss_feed.dart';
-import '../controllers/news_model.dart';
+import '../controllers/news_controller.dart';
 import 'package:provider/provider.dart';
 import 'package:mynewspod/favorites.dart';
 
@@ -23,18 +23,17 @@ class NewsItems extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var myDatabase = Provider.of<MyDatabase>(context);
-    final news = Provider.of<NewsModel>(context);
+    final news = Provider.of<NewsController>(context);
     printFavs(context);
     return RefreshIndicator(
       key: Key('refreshKey'),
       onRefresh: () async {
-        await Future.delayed(Duration(milliseconds: 100));
-        news.parse();
+        await news.fetchNews();
       },
       child: ListView(
         key: PageStorageKey(index),
         padding: const EdgeInsets.only(left: 8, top: 8, right: 8, bottom: 8),
-        children: rssFeed.items
+        children: news.feed.items
             .map(
               (i) => ListTile(
                 key: PageStorageKey(i.guid),
@@ -60,7 +59,7 @@ class NewsItems extends StatelessWidget {
                               onPressed: () =>
                                   myDatabase.removeFavorite(i.guid),
                             );
-                          } else
+                          } else {
                             return IconButton(
                               icon: Icon(Icons.star,
                                   size: 34, color: Colors.black12),
@@ -68,9 +67,10 @@ class NewsItems extends StatelessWidget {
                                 myDatabase.addFavorite(i);
                               },
                             );
+                          }
                         })),
                 onTap: () {
-                  news.selectedItem = i;
+//                  news.feed.items[2] = i;
                   Navigator.of(context).push(
                     MaterialPageRoute(builder: (_) => SelectedNewsPage()),
                   );

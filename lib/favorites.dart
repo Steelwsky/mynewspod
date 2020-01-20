@@ -1,5 +1,5 @@
 import 'package:moor_flutter/moor_flutter.dart';
-import 'package:mynewspod/controllers/news_model.dart';
+import 'package:mynewspod/controllers/news_controller.dart';
 import 'package:webfeed/domain/rss_item.dart';
 
 // assuming that your file is called filename.dart. This will give an error at first,
@@ -43,16 +43,11 @@ class MyDatabase extends _$MyDatabase {
     return (select(favorites)..where((favorite) => favorite.id.equals(id))).watchSingle();
   }
 
-  /*
-  select favorite.title from favorite
-  where favorite.id = '000132'
 
-   */
-
-  NewsModel newsModel;
+  NewsController newsModel;
 
   void addFavorite(RssItem f) {
-    var favorite = Favorite(
+    final favorite = Favorite(
       id: f.guid,
       title: f.title,
       content: f.description,
