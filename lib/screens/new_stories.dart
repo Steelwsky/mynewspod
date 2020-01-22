@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:mynewspod/controllers/news_controller.dart';
 import 'package:mynewspod/widgets/news_items.dart';
+import 'package:webfeed/domain/rss_feed.dart';
 
 class NewStories extends StatelessWidget {
   final int index;
@@ -13,15 +14,16 @@ class NewStories extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Consumer<NewsController>(builder: (context, news, _) {
-        return news.feed != null
-            ? NewsItems(
-                rssFeed: news.feed,
-                index: index,
-              )
-            : Center(child: CircularProgressIndicator());
-      }),
-    );
+    final news = Provider.of<NewsController>(context);
+    return ValueListenableBuilder<RssFeed>(
+        valueListenable: news.newsState.value,
+        builder: (_, newState, __) {
+          return news.feed != null
+              ? NewsItems(
+                  rssFeed: news.feed,
+                  index: index,
+                )
+              : Center(child: CircularProgressIndicator());
+        });
   }
 }

@@ -22,8 +22,9 @@ class NewsItems extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var myDatabase = Provider.of<MyDatabase>(context);
+    final myDatabase = Provider.of<MyDatabase>(context);
     final news = Provider.of<NewsController>(context);
+    final newsItem = Provider.of<NewsItemController>(context);
     printFavs(context);
     return RefreshIndicator(
       key: Key('refreshKey'),
@@ -70,7 +71,8 @@ class NewsItems extends StatelessWidget {
                           }
                         })),
                 onTap: () {
-//                  news.feed.items[2] = i;
+//                  news.selectedItem = i;
+                newsItem.newsItemState.value = i;
                   Navigator.of(context).push(
                     MaterialPageRoute(builder: (_) => SelectedNewsPage()),
                   );

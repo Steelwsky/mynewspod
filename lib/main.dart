@@ -12,8 +12,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(
-          create: (context) => NewsController()..fetchNews(),
+        Provider<NewsController>(
+          create: (context) => NewsController(),
+        ),
+        Provider<NewsItemController>(
+          create: (context) => NewsItemController(),
         ),
         Provider<BottomNavBarController>(
             create: (_) => BottomNavBarController()),
