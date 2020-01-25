@@ -18,13 +18,13 @@ class SelectedNewsPage extends StatelessWidget {
   Widget build(BuildContext context) {
 //    final news = Provider.of<NewsController>(context);
     final newsItem = Provider.of<NewsItemController>(context);
-    return ValueListenableBuilder<RssItem>(
-        valueListenable: newsItem.newsItemState.value,
+    return ValueListenableBuilder(
+        valueListenable: newsItem.newsItemState,
         builder: (_, newState, __) {
           return Scaffold(
             appBar: AppBar(
           title: Text(newState.title)
-            ), //TODO it's wrong.
+            ),
             body: Column(
               children: [
                 SingleChildScrollView(

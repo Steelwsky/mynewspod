@@ -33,10 +33,6 @@ class MyDatabase extends _$MyDatabase {
 
   Future<List<Favorite>> get allFavorites => select(favorites).get();
 
-//  Future<List<Favorite>> get selectedFavorite => select(favorites).where((favorite) => favorite.id.equals(id))).get();
-
-//  Future<List<Favorite>> get selectedFavorite => select(favorites.).get();
-
   Stream<List<Favorite>> watchAllFavorites() => select(favorites).watch();
 
   Stream<Favorite> entryById(String id) {
@@ -59,10 +55,8 @@ class MyDatabase extends _$MyDatabase {
   void removeFavorite(String id) =>
       (delete(favorites)..where((t) => t.id.equals(id))).go();
 
-  // watches all todo entries in a given category. The stream will automatically
-  // emit new items whenever the underlying data changes.
   Stream<bool> isFavorite(String id) {
     return select(favorites).watch().map((favoritesList) =>
-        favoritesList.where((favorite) => favorite.id == id).length >= 1);
+        favoritesList.where((favorite) => favorite.id == id).isNotEmpty);
   }
 }

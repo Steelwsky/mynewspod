@@ -15,12 +15,11 @@ class NewStories extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final news = Provider.of<NewsController>(context);
-    return ValueListenableBuilder<RssFeed>(
-        valueListenable: news.newsState.value,
-        builder: (_, newState, __) {
-          return news.feed != null
+    return ValueListenableBuilder(
+        valueListenable: news.newsState,
+        builder: (context, newsBuilder, _) {
+          return news.newsState.value.items != null
               ? NewsItems(
-                  rssFeed: news.feed,
                   index: index,
                 )
               : Center(child: CircularProgressIndicator());

@@ -8,13 +8,9 @@ import 'package:mynewspod/favorites.dart';
 class NewsItems extends StatelessWidget {
   NewsItems({
     Key key,
-    this.rssFeed,
     this.index,
   }) : super(key: key);
-  final RssFeed rssFeed;
   final int index;
-  bool isFav;
-  Color color = Colors.black12;
 
   void printFavs(BuildContext context) async {
     print(await Provider.of<MyDatabase>(context).allFavorites);
@@ -28,13 +24,11 @@ class NewsItems extends StatelessWidget {
     printFavs(context);
     return RefreshIndicator(
       key: Key('refreshKey'),
-      onRefresh: () async {
-        await news.fetchNews();
-      },
+      onRefresh: () async => news.fetchNews(),
       child: ListView(
         key: PageStorageKey(index),
         padding: const EdgeInsets.only(left: 8, top: 8, right: 8, bottom: 8),
-        children: news.feed.items
+        children: news.newsState.value.items
             .map(
               (i) => ListTile(
                 key: PageStorageKey(i.guid),
@@ -71,7 +65,6 @@ class NewsItems extends StatelessWidget {
                           }
                         })),
                 onTap: () {
-//                  news.selectedItem = i;
                 newsItem.newsItemState.value = i;
                   Navigator.of(context).push(
                     MaterialPageRoute(builder: (_) => SelectedNewsPage()),
