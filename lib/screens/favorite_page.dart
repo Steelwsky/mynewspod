@@ -24,7 +24,8 @@ class FavoritePage extends StatelessWidget {
             child: StreamBuilder(
               stream: myDatabase.watchAllFavorites(),
               // TODO function favorController (remove, add)
-              builder: (context, AsyncSnapshot<List<Favorite>> snapshot) { //<List<Favorite>> to <FavList>
+              builder: (context, AsyncSnapshot<List<Favorite>> snapshot) {
+                //<List<Favorite>> to <FavList>
                 final favs = snapshot.data ?? List();
                 return favs.isEmpty
                     ? Text('There is no single story =/')
@@ -58,12 +59,9 @@ class FavoritePage extends StatelessWidget {
                                               .removeFavorite(favItem.id),
                                         );
                                       } else {
-                                        return IconButton(
-                                            icon: Icon(Icons.star,
-                                                size: 34,
-                                                color: Colors.black12),
-                                            onPressed: () => myDatabase
-                                                .removeFavorite(favItem.id));
+                                        return Center(
+                                          child: CircularProgressIndicator(),
+                                        );
                                       }
                                     })),
                             onTap: () {

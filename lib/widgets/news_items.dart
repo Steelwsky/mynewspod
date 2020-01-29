@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:mynewspod/widgets/selected_news_page.dart';
-import 'package:webfeed/domain/rss_feed.dart';
 import '../controllers/news_controller.dart';
 import 'package:provider/provider.dart';
 import 'package:mynewspod/favorites.dart';
@@ -9,8 +8,10 @@ class NewsItems extends StatelessWidget {
   NewsItems({
     Key key,
     this.index,
+    this.isFav,
   }) : super(key: key);
   final int index;
+  final bool isFav;
 
   void printFavs(BuildContext context) async {
     print(await Provider.of<MyDatabase>(context).allFavorites);
@@ -43,29 +44,30 @@ class NewsItems extends StatelessWidget {
                   style: TextStyle(fontSize: 16),
                 ),
                 trailing: Container(
-                    width: 40,
-                    child: StreamBuilder<bool>(
-                        stream: myDatabase.isFavorite(i.guid),
-                        builder: (context, snapshot) {
-                          if (snapshot.hasData && snapshot.data) {
-                            return IconButton(
-                              icon: Icon(Icons.star,
-                                  size: 34, color: Colors.amber),
-                              onPressed: () =>
-                                  myDatabase.removeFavorite(i.guid),
-                            );
-                          } else {
-                            return IconButton(
-                              icon: Icon(Icons.star,
-                                  size: 34, color: Colors.black12),
-                              onPressed: () {
-                                myDatabase.addFavorite(i);
-                              },
-                            );
-                          }
-                        })),
+                  width: 40,
+                  child: StreamBuilder<bool>(
+                      stream: myDatabase.isFavorite(i.guid),
+                      builder: (context, snapshot) {
+                        if (snapshot.hasData && snapshot.data) {
+                          return IconButton(
+                            icon:
+                                Icon(Icons.star, size: 34, color: Colors.amber),
+                            onPressed: () => myDatabase.removeFavorite(i.guid),
+                          );
+                        } else {
+                          return IconButton(
+                            icon: Icon(Icons.star,
+                                size: 34, color: Colors.black12),
+                            onPressed: () {
+                              myDatabase.addFavorite(i);
+                            },
+                          );
+                        }
+                      }),
+                  // must be something like this: child: StarWidget();
+                ),
                 onTap: () {
-                newsItem.newsItemState.value = i;
+                  newsItem.newsItemState.value = i;
                   Navigator.of(context).push(
                     MaterialPageRoute(builder: (_) => SelectedNewsPage()),
                   );

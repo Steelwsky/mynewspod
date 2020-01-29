@@ -2,14 +2,28 @@ import 'package:flutter/material.dart';
 import 'package:mynewspod/controllers/controller_bottom_nav_bar.dart';
 import 'package:provider/provider.dart';
 
-class MyBottomNavigationBar extends StatelessWidget {
+class MyBottomNavigationBar extends StatefulWidget {
   MyBottomNavigationBar({Key key}) : super(key: key);
 
   @override
+  _MyBottomNavigationBarState createState() => _MyBottomNavigationBarState();
+}
+
+class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> {
+  int _selectedIndex = 0;
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
+
+
+  @override
   Widget build(BuildContext context) {
-    final bnbController = Provider.of<BottomNavBarController>(
-        context); // make this widget stful and
-    final tabNotifier = Provider.of<TabNotifier>(context);
+//    final bnbController = Provider.of<BottomNavBarController>(context); // make this widget stful and
+//    final tabNotifier = Provider.of<TabNotifier>(context);
+    final tabNotifier = TabHelper();
     return BottomNavigationBar(
         items: [
           ...tabNotifier.tabs.map((tab) => BottomNavigationBarItem(
@@ -17,8 +31,8 @@ class MyBottomNavigationBar extends StatelessWidget {
                 title: Text(tab.tabName),
               ))
         ],
-        currentIndex: bnbController.state.value,
+        currentIndex:_selectedIndex,
         selectedItemColor: Colors.blue,
-        onTap: bnbController.onItemTapped);
+        onTap: _onItemTapped);
   }
 }

@@ -18,11 +18,10 @@ class MyApp extends StatelessWidget {
         Provider<NewsItemController>(
           create: (context) => NewsItemController(),
         ),
-        Provider<BottomNavBarController>(
-            create: (_) => BottomNavBarController()),
-        ChangeNotifierProvider<TabNotifier>(
-          create: (_) => TabNotifier(),
-        ),
+//        Provider<BottomNavBarController>(create: (_) => BottomNavBarController()),
+//        ChangeNotifierProvider<TabNotifier>(
+//          create: (_) => TabNotifier(),
+//        ),
         Provider<MyDatabase>(create: (_) => MyDatabase()),
       ],
       child: MaterialApp(

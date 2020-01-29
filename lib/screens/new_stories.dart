@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:mynewspod/controllers/news_controller.dart';
 import 'package:mynewspod/widgets/news_items.dart';
-import 'package:webfeed/domain/rss_feed.dart';
 
 class NewStories extends StatelessWidget {
   final int index;
