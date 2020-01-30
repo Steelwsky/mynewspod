@@ -28,7 +28,7 @@ class FavoritePage extends StatelessWidget {
                 //<List<Favorite>> to <FavList>
                 final favs = snapshot.data ?? List();
                 return favs.isEmpty
-                    ? Text('There is no single story =/')
+                    ? Text('There is no single story =/') //TODO when i go to fav stories this text shows like 5 frames. I need to load at first then show result
                     : ListView.builder(
                         key: PageStorageKey(index),
                         itemCount: favs.length,
@@ -47,7 +47,7 @@ class FavoritePage extends StatelessWidget {
                             ),
                             trailing: Container(
                                 width: 40,
-                                child: StreamBuilder<bool>(
+                                child: StreamBuilder<bool>(  //TODO wrong implementation. i don't need to check here for hasData. totally wrong!!!
                                     //convert to ValueNotifier
                                     stream: myDatabase.isFavorite(favItem.id),
                                     builder: (context, snapshot) {

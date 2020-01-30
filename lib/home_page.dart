@@ -14,18 +14,16 @@ class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     //TODO Deal with tabController, make it stfl and simple
-    final newNavController = MyBottomNavigationBar();
-    final bnbController = Provider.of<BottomNavBarController>(context);
-    final tabHelper = TabHelper();
+    final bottomNavBarController = Provider.of<BottomNavBarController>(context);
     return ValueListenableBuilder<int>(
-        valueListenable: bnbController.state,
+        valueListenable: bottomNavBarController.state,
         builder: (_, newState, __) {
           return Scaffold(
             appBar: AppBar(
-                title: Text(tabHelper.tabs
-                    .elementAt(bnbController.state.value)
+                title: Text(bottomNavBarController.tabs
+                    .elementAt(bottomNavBarController.state.value)
                     .tabName)),
-            body: tabHelper.screenOptions.elementAt(newState),
+            body: bottomNavBarController.screenOptions.elementAt(newState),
             bottomNavigationBar: MyBottomNavigationBar(),
 //        NewBottomNavBar(),
           );

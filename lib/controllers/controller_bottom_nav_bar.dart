@@ -5,18 +5,7 @@ import 'package:mynewspod/screens/new_stories.dart';
 import 'package:pedantic/pedantic.dart';
 
 
-//class BottomNavBarController {
-//  final ValueNotifier<int> state =
-//  ValueNotifier(0); // - for first page: New stories
-//
-//  void onItemTapped(int index) {
-//    state.value = index;
-//    print('index: $index');
-//  }
-//
-//}
-
-class TabModel{
+class TabModel {
 //  final int index;
   final String tabName;
   final String bottomName;
@@ -25,10 +14,18 @@ class TabModel{
   TabModel({this.tabName, this.bottomName, this.icon});
 }
 
-class TabHelper {
+class BottomNavBarController {
+  final ValueNotifier<int> state = ValueNotifier(0);
+
   List<TabModel> _tabs;
 
-  TabHelper() {
+
+  void onItemTapped(int index) {
+    state.value = index;
+    print('index: $index');
+  }
+
+  BottomNavBarController() {
     _tabs = [
       TabModel(
         tabName: 'New stories',
@@ -57,4 +54,3 @@ class TabHelper {
 
   UnmodifiableListView<TabModel> get tabs => UnmodifiableListView(_tabs);
 }
-
